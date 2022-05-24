@@ -89,3 +89,9 @@ variable "filter_prefix" {
   type        = string
   default     = "AWSLogs/"
 }
+
+variable "use_response_elements" {
+  description = "Show the response elements in Slack or not"
+  default     = true
+  type        = bool
+}

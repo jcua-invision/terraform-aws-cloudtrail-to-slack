@@ -200,7 +200,8 @@ def event_to_slack_message(event, source_file):
     error_code = event['errorCode'] if 'errorCode' in event else None
     error_message = event['errorMessage'] if 'errorMessage' in event else None
     request_parameters = event['requestParameters'] if 'requestParameters' in event else None
-    response_elements = event['responseElements'] if 'responseElements' in event else None
+    response_elements = event['responseElements'] if ('responseElements' in event
+       and read_env_variable_or_die('USE_RESPONSE_ELEMENTS')) else None
     additional_details = event['additionalEventData'] if 'additionalEventData' in event else None
     event_time = datetime.strptime(event['eventTime'], '%Y-%m-%dT%H:%M:%SZ')
     event_id = event['eventID']
