@@ -201,7 +201,7 @@ def event_to_slack_message(event, source_file):
     error_message = event['errorMessage'] if 'errorMessage' in event else None
     request_parameters = event['requestParameters'] if 'requestParameters' in event else None
     response_elements = event['responseElements'] if ('responseElements' in event
-       and read_env_variable_or_die('USE_RESPONSE_ELEMENTS')) else None
+       and read_env_variable_or_die('USE_RESPONSE_ELEMENTS') == 'True') else None
     additional_details = event['additionalEventData'] if 'additionalEventData' in event else None
     event_time = datetime.strptime(event['eventTime'], '%Y-%m-%dT%H:%M:%SZ')
     event_id = event['eventID']
@@ -218,8 +218,8 @@ def event_to_slack_message(event, source_file):
             'type': 'section',
             'text': {
                 'type': 'mrkdwn',
-                'text': title
-            }
+                'text': '`%s`' % title,
+            },
         }
     )
 
