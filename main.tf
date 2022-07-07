@@ -89,9 +89,16 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
   bucket = data.aws_s3_bucket.cloudtrail.id
 
   lambda_function {
-    lambda_function_arn = module.lambda.lambda_function_arn
+    lambda_function_arn = var.function_prod_name
     events              = ["s3:ObjectCreated:*", "s3:ObjectRemoved:*"]
-    filter_prefix       = var.filter_prefix
+    filter_prefix       = var.filter_prod_prefix
+    filter_suffix       = ".json.gz"
+  }
+
+  lambda_function {
+    lambda_function_arn = var.function_test_name
+    events              = ["s3:ObjectCreated:*", "s3:ObjectRemoved:*"]
+    filter_prefix       = var.filter_test_prefix
     filter_suffix       = ".json.gz"
   }
 
