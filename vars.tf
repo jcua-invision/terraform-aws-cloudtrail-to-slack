@@ -5,6 +5,18 @@ variable "function_name" {
   type        = string
 }
 
+variable "function_prod_name" {
+  description = "Lambda prod function name"
+  default     = "fivexl-cloudtrail-to-slack"
+  type        = string
+}
+
+variable "function_test_name" {
+  description = "Lambda test function name"
+  default     = "fivexl-cloudtrail-to-slack"
+  type        = string
+}
+
 variable "configuration" {
   description = "Allows to configure slack web hook url per account(s) so you can separate events from different accounts to different channels. Useful in context of AWS organization"
   type = list(object({
